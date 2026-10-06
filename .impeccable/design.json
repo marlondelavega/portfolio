@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-06T00:00:00.000Z",
+  "title": "Design System: Marlon de la Vega Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Mint Action",
+        "canonical": "oklch(85% 0.138 181.071)",
+        "tonalRamp": [
+          "oklch(20% 0.04 181)",
+          "oklch(30% 0.07 181)",
+          "oklch(43% 0.078 188)",
+          "oklch(52% 0.10 181)",
+          "oklch(62% 0.12 181)",
+          "oklch(72% 0.13 181)",
+          "oklch(85% 0.138 181)",
+          "oklch(95% 0.06 181)"
+        ]
+      },
+      "primary-content": {
+        "role": "neutral",
+        "displayName": "Mint Ink",
+        "canonical": "oklch(43% 0.078 188.216)",
+        "tonalRamp": [
+          "oklch(20% 0.04 188)",
+          "oklch(30% 0.06 188)",
+          "oklch(43% 0.078 188)",
+          "oklch(55% 0.09 188)",
+          "oklch(65% 0.08 188)",
+          "oklch(75% 0.06 188)",
+          "oklch(85% 0.04 188)",
+          "oklch(95% 0.02 188)"
+        ]
+      },
+      "base-100": {
+        "role": "neutral",
+        "displayName": "Warm Card",
+        "canonical": "oklch(97.788% 0.004 56.375)",
+        "tonalRamp": [
+          "oklch(20% 0.004 56)",
+          "oklch(35% 0.005 56)",
+          "oklch(50% 0.005 56)",
+          "oklch(65% 0.005 56)",
+          "oklch(78% 0.005 56)",
+          "oklch(88% 0.005 56)",
+          "oklch(93% 0.005 56)",
+          "oklch(97.788% 0.004 56.375)"
+        ]
+      },
+      "base-300": {
+        "role": "neutral",
+        "displayName": "Cream Canvas",
+        "canonical": "oklch(91.586% 0.006 53.44)",
+        "tonalRamp": [
+          "oklch(20% 0.005 53)",
+          "oklch(35% 0.006 53)",
+          "oklch(50% 0.006 53)",
+          "oklch(65% 0.006 53)",
+          "oklch(75% 0.006 53)",
+          "oklch(82% 0.006 53)",
+          "oklch(88% 0.006 53)",
+          "oklch(91.586% 0.006 53.44)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "body": { "displayName": "Body", "purpose": "Bio, dialog paragraphs, and descriptions. Keep the measure inside the narrow left column." },
+      "label": { "displayName": "Label", "purpose": "Secondary text, skill descriptions, and toggle labels." }
+    },
+    "shadows": [
+      { "name": "tile-lift", "value": "var(--shadow-sm)", "purpose": "Logo tile in the header and skill tiles at rest." },
+      { "name": "panel-lift", "value": "var(--shadow-lg)", "purpose": "Main work panel only." }
+    ],
+    "motion": [
+      { "name": "fly-entrance", "value": "fly x:-40 duration:600", "purpose": "Section reveal on load, cascaded 200/400/600ms by delay." },
+      { "name": "skill-swap", "value": "fly x:-40 duration:400, no delay", "purpose": "Skill list remount on tab switch; plays immediately." },
+      { "name": "tile-hover", "value": "translate-y -0.5 and rotate by --rotate, 300ms", "purpose": "Logo tile hover tilt in the skill list." }
+    ],
+    "breakpoints": [
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Mint action button for the active toggle and key dialog actions.",
+      "html": "<button class=\"ds-btn-primary\">Info</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.75rem; min-height: 2rem; font-size: 0.875rem; background: var(--color-primary); color: var(--color-primary-content); border: 0; border-radius: var(--radius-field); cursor: pointer; transition: filter 0.2s; } .ds-btn-primary:hover { filter: brightness(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }"
+    },
+    {
+      "name": "Default Button",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Soft-well button for secondary actions such as Contact me.",
+      "html": "<button class=\"ds-btn\">Contact me</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.75rem; min-height: 2rem; font-size: 0.875rem; background: var(--color-base-200); color: var(--color-base-content); border: 0; border-radius: var(--radius-field); cursor: pointer; transition: filter 0.2s; } .ds-btn:hover { filter: brightness(0.96); } .ds-btn:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }"
+    },
+    {
+      "name": "Segmented Toggle",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Development / Design switch above the skill list.",
+      "html": "<div class=\"ds-toggle\"><button class=\"ds-seg ds-seg-active\" aria-pressed=\"true\">Development</button><button class=\"ds-seg\" aria-pressed=\"false\">Design</button></div>",
+      "css": ".ds-toggle { display: flex; width: 100%; gap: 0; } .ds-seg { flex: 1; padding: 0.25rem 0.75rem; min-height: 2rem; font-size: 0.875rem; background: var(--color-base-200); color: var(--color-base-content); border: 0; border-radius: var(--radius-field); cursor: pointer; } .ds-seg-active { background: var(--color-primary); color: var(--color-primary-content); } .ds-seg:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }"
+    },
+    {
+      "name": "Surface Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Warm card container for the bio, header, and skill list.",
+      "html": "<section class=\"ds-card\">Content</section>",
+      "css": ".ds-card { background: var(--color-base-100); color: var(--color-base-content); border-radius: 1.5rem; padding: 1rem; }"
+    },
+    {
+      "name": "Skill Tile",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Skill row with a logo tile that tilts on hover by a per-tab random angle.",
+      "html": "<div class=\"ds-skill\" style=\"--rotate: 4deg\"><div class=\"ds-skill-logo\"><svg viewBox=\"0 0 24 24\" width=\"56\" height=\"56\"><path d=\"M12 2l9 5v10l-9 5-9-5V7z\"/></svg></div><div><span class=\"ds-skill-name\">Name</span><p class=\"ds-skill-text\">Description</p></div></div>",
+      "css": ".ds-skill { display: flex; align-items: center; gap: 1rem; padding: 0.75rem; border-radius: 1rem; background: var(--color-base-200); transition: background 0.3s; } .ds-skill:hover { background: var(--color-base-300); } .ds-skill-logo { width: 6rem; height: 6rem; display: flex; align-items: center; justify-content: center; border-radius: 1rem; background: var(--color-base-100); box-shadow: var(--shadow-sm); transition: transform 0.3s; flex-shrink: 0; } .ds-skill:hover .ds-skill-logo { transform: translateY(-0.125rem) rotate(var(--rotate)); } .ds-skill-name { font-weight: 500; } .ds-skill-text { margin-top: 0.125rem; font-size: 0.875rem; color: color-mix(in oklab, var(--color-base-content) 70%, transparent); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Drafting Table",
+    "overview": "The page reads like a drafting table: calm, precise, and tool-like, with the work and the making of it visible. Everything sits on a warm cream surface in soft, rounded cards, so the page feels handmade rather than corporate. The mint primary is the single signal color; it marks what can be pressed, not decoration.",
+    "keyCharacteristics": [
+      "Warm cream and neutral surfaces with a single mint accent",
+      "Soft, rounded cards and controls with gentle layering",
+      "Monospace typography throughout",
+      "Tactile, friendly controls that respond to hover and press",
+      "Left column for identity and skills, right panel for the work"
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Mint is reserved for things a visitor can press or follow. Its rarity on the page is what makes it read as an action.", "section": "colors" },
+      { "name": "The Weight Not Color Rule", "body": "Hierarchy comes from weight and size in the single monospace face. Gradient text and extra typefaces are not used.", "section": "typography" },
+      { "name": "The Tonal First Rule", "body": "Separate surfaces by tone before reaching for a shadow. Shadows appear on a single tile or panel at a time, never stacked on every card.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use the mint primary only for actions and the toggle's active state.",
+      "Do keep text in the monospace face and express hierarchy with weight and size.",
+      "Do keep surfaces separated by tone first, and use the shadow tokens sparingly.",
+      "Do keep the skill list's entrance and key transitions on the existing motion pattern."
+    ],
+    "donts": [
+      "Don't add gradient text or a second typeface.",
+      "Don't stack shadows on every card or use zero-blur hard shadows.",
+      "Don't use mint as a decorative background or for body copy.",
+      "Don't introduce loud neon or high-saturation effects.",
+      "Don't make the page look like a generic agency or stock portfolio template."
+    ]
+  }
+}

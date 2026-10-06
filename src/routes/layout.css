@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+@plugin 'daisyui' {
+	themes:
+		light --default,
+		dark --prefersdark,
+		cupcake;
+}
+
+:root {
+	font-family: 'Courier New', Courier, monospace;
+}
+
+::selection {
+	background: color-mix(in oklab, var(--color-primary) 30%, transparent);
+	color: var(--color-base-content);
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+}
+
+.drafting-grid {
+	background-image:
+		linear-gradient(
+			color-mix(in oklab, var(--color-base-content) 6%, transparent) 1px,
+			transparent 1px
+		),
+		linear-gradient(
+			90deg,
+			color-mix(in oklab, var(--color-base-content) 6%, transparent) 1px,
+			transparent 1px
+		);
+	background-size: 24px 24px;
+}
+
+.thin-scroll {
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in oklab, var(--color-base-content) 25%, transparent) transparent;
+}
