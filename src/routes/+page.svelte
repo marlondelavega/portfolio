@@ -30,10 +30,21 @@
 	let activeWork: { url: string; title: string } | null = $state(null);
 	let workDialog: HTMLDialogElement | undefined = $state();
 
+	function revealOnView(node: HTMLElement) {
+		const observer = new window.IntersectionObserver(
+			([entry]) => node.classList.toggle('is-in-view', entry.isIntersecting),
+			{ threshold: 0.15 }
+		);
+		observer.observe(node);
+		return { destroy: () => observer.disconnect() };
+	}
+
 	function openWork(work: { url: string; title: string }) {
 		activeWork = work;
 		workDialog?.showModal();
 	}
+
+	let mobileView: 'skills' | 'works' = $state('skills');
 
 	let activeSkillTab: 'dev' | 'design' = $state('dev');
 	const reduceMotion =
@@ -64,9 +75,13 @@
 				<div class="ml-3 size-8"><Logo /></div>
 
 				<div class="flex flex-row gap-2">
-					<button class="btn inline-flex btn-sm lg:hidden">
-						<Mail class="size-5" />
-						<span>My works</span>
+					<button
+						class="btn inline-flex btn-sm lg:hidden"
+						aria-pressed={mobileView === 'works'}
+						onclick={() => (mobileView = mobileView === 'works' ? 'skills' : 'works')}
+					>
+						<BriefcaseBusiness class="size-5" />
+						<span>{mobileView === 'works' ? 'Skills' : 'My works'}</span>
 					</button>
 
 					<button class="btn btn-primary btn-sm" onclick={() => infoDialog?.showModal()}>
@@ -108,7 +123,7 @@
 			</section>
 		</IntersectionObserver>
 
-		<div class="flex min-h-0 grow flex-col gap-2">
+		<div class="min-h-0 grow flex-col gap-2 {mobileView === 'works' ? 'hidden' : 'flex'} lg:flex">
 			<IntersectionObserver delay={400}>
 				<div class="join w-full">
 					<button
@@ -153,6 +168,12 @@
 				{/key}
 			</IntersectionObserver>
 		</div>
+
+		{#if mobileView === 'works'}
+			<div class="flex min-h-0 grow flex-col lg:hidden">
+				{@render WorksGrid()}
+			</div>
+		{/if}
 	</aside>
 
 	<main
@@ -165,27 +186,7 @@
 			<span>My works</span>
 		</section>
 
-		<IntersectionObserver
-			delay={800}
-			class="thin-scroll min-h-0 flex-1 overflow-auto rounded-3xl bg-base-100 p-4"
-		>
-			<div class="columns-2 gap-4">
-				{#each works as work (work.url)}
-					<button
-						type="button"
-						class="group mb-4 block w-full break-inside-avoid overflow-hidden rounded-3xl bg-base-200 focus-visible:outline-offset-4"
-						onclick={() => openWork(work)}
-					>
-						<img
-							src={work.url}
-							alt={work.title}
-							loading="lazy"
-							class="block w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-						/>
-					</button>
-				{/each}
-			</div>
-		</IntersectionObserver>
+		{@render WorksGrid()}
 	</main>
 
 	<dialog bind:this={workDialog} class="modal">
@@ -291,6 +292,31 @@
 		<button>close</button>
 	</form>
 </dialog>
+
+{#snippet WorksGrid()}
+	<IntersectionObserver
+		delay={800}
+		class="thin-scroll min-h-0 flex-1 overflow-auto rounded-3xl bg-base-100 p-4"
+	>
+		<div class="columns-1 gap-4 sm:columns-2">
+			{#each works as work (work.url)}
+				<button
+					type="button"
+					use:revealOnView
+					class="work-item group mb-4 block w-full break-inside-avoid overflow-hidden rounded-3xl bg-base-200 focus-visible:outline-offset-4"
+					onclick={() => openWork(work)}
+				>
+					<img
+						src={work.url}
+						alt={work.title}
+						loading="lazy"
+						class="block w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+					/>
+				</button>
+			{/each}
+		</div>
+	</IntersectionObserver>
+{/snippet}
 
 {#snippet SkillCard(name: string, text: string, icon: SimpleIcon, level: string, rotate: number)}
 	<div
