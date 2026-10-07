@@ -60,3 +60,12 @@
 	scrollbar-width: thin;
 	scrollbar-color: color-mix(in oklab, var(--color-base-content) 25%, transparent) transparent;
 }
+
+.no-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}

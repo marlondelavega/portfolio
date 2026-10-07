@@ -49,55 +49,55 @@ export const devSkills = [
 	{
 		name: 'Svelte / SvelteKit',
 		level: '',
-		text: 'Proficient at using SvelteKit and had an opportunity using it in a solo full-stack software development.',
+		text: 'My primary framework. I use SvelteKit with Svelte 5 runes to build full-stack government information systems, handling everything from routing and form actions to server-side data loading as a solo developer.',
 		icon: siSvelte
 	},
 	{
 		name: 'Tailwind CSS',
 		level: '',
-		text: 'Skilled usage of TailwindCSS in all recent projects.',
+		text: 'My go-to for styling. I use Tailwind in all my recent projects to build clean, responsive interfaces quickly and keep design consistent across apps.',
 		icon: siTailwindcss
 	},
 	{
 		name: 'MongoDB',
 		level: '',
-		text: 'Comfortable using MongoDB as the primary database for full-stack applications.',
+		text: 'My primary database for full-stack applications, including aggregation pipelines for reporting and data summaries.',
 		icon: siMongodb
 	},
 	{
 		name: 'Mongoose',
 		level: '',
-		text: 'Model MongoDB data with schemas and validation using Mongoose.',
+		text: 'I pair Mongoose with MongoDB to define schemas, enforce validation, and model relationships between collections in production systems.',
 		icon: siMongoose
 	},
 	{
 		name: 'Hono',
 		level: '',
-		text: 'Build lightweight, fast backend APIs with the Hono framework.',
+		text: 'I build lightweight, type-safe REST APIs with Hono, structured into routes, services, and validation layers.',
 		icon: siHono
 	},
 	{
 		name: 'Solid',
 		level: '',
-		text: 'Build reactive, performant front-ends with SolidJS.',
+		text: 'Built a frontend web app with SolidJS, which gave me hands-on experience with fine-grained reactivity.',
 		icon: siSolid
 	},
 	{
 		name: 'React',
 		level: '',
-		text: 'Build component-driven interfaces with React.',
+		text: 'The first JavaScript framework I learned. Building small projects with it gave me my foundation in components, state, and modern frontend development.',
 		icon: siReact
 	},
 	{
 		name: 'MySQL',
 		level: '',
-		text: 'Design and query relational databases with MySQL.',
+		text: 'Used MySQL as the relational database for apps I built in college, working with SQL queries, joins, and table design.',
 		icon: siMysql
 	},
 	{
 		name: 'PHP',
 		level: '',
-		text: 'Build server-side logic and APIs with PHP.',
+		text: 'My go-to server-side language during college, where I built dynamic web apps backed by MySQL.',
 		icon: siPhp
 	}
 ];
@@ -106,25 +106,19 @@ export const designSkills = [
 	{
 		name: 'Adobe Illustrator',
 		level: '',
-		text: 'Design vector logos, layouts, and print materials for government events and campaigns.',
+		text: 'My main design tool. I use Illustrator to create logos, vector graphics, and layered artwork prepared for animation.',
 		icon: adobeIllustrator
 	},
 	{
 		name: 'Adobe Photoshop',
 		level: '',
-		text: 'Edit and compose raster graphics for print and digital media.',
+		text: 'I use Photoshop for raster work such as photo editing, retouching, and image manipulation for digital and print materials.',
 		icon: adobePhotoshop
-	},
-	{
-		name: 'Adobe Premiere Pro',
-		level: '',
-		text: 'Edit video content for promotional and event materials.',
-		icon: adobePremiere
 	},
 	{
 		name: 'Adobe After Effects',
 		level: '',
-		text: 'Create motion graphics and animated visuals for digital media.',
+		text: 'During my on-the-job training, I combined After Effects with Illustrator to produce a Kurzgesagt-inspired explainer animation about global warming, handling both the illustrations and the motion.',
 		icon: adobeAftereffects
 	}
 ];

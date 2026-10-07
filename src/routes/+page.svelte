@@ -6,28 +6,13 @@
 	import IntersectionObserver from '$lib/components/IntersectionObserver.svelte';
 	import { designSkills, devSkills, randomRotate } from '$lib/data/skills.js';
 	import BrandIcon from '$lib/components/BrandIcon.svelte';
+	import WorkTile from '$lib/components/WorkTile.svelte';
 	import { type SimpleIcon } from 'simple-icons';
+	import { works, getYouTubeId, type Work } from '$lib/data/works.js';
 
 	const email = 'marlondelaveg4@gmail.com';
 
-	const designFiles = import.meta.glob('$lib/assets/designs/web/*.png', {
-		eager: true,
-		query: '?url',
-		import: 'default'
-	}) as Record<string, string>;
-
-	const works = Object.entries(designFiles)
-		.sort(([a], [b]) => a.localeCompare(b))
-		.map(([path, url]) => ({
-			url,
-			title: path
-				.split('/')
-				.pop()!
-				.replace(/\.png$/, '')
-				.replace(/\b\w/g, (c) => c.toUpperCase())
-		}));
-
-	let activeWork: { url: string; title: string } | null = $state(null);
+	let activeWork: Work | null = $state(null);
 	let workDialog: HTMLDialogElement | undefined = $state();
 
 	function revealOnView(node: HTMLElement) {
@@ -39,7 +24,7 @@
 		return { destroy: () => observer.disconnect() };
 	}
 
-	function openWork(work: { url: string; title: string }) {
+	function openWork(work: Work) {
 		activeWork = work;
 		workDialog?.showModal();
 	}
@@ -189,18 +174,42 @@
 		{@render WorksGrid()}
 	</main>
 
-	<dialog bind:this={workDialog} class="modal">
+	<dialog bind:this={workDialog} class="modal" onclose={() => (activeWork = null)}>
 		<div class="modal-box w-11/12 max-w-5xl p-3">
 			<form method="dialog">
 				<button class="btn absolute top-3 right-3 z-10 btn-circle btn-ghost btn-sm">✕</button>
 			</form>
 			{#if activeWork}
-				<img
-					src={activeWork.url}
-					alt={activeWork.title}
-					class="max-h-[80vh] w-full rounded-2xl object-contain"
-				/>
-				<p class="mt-3 text-sm font-medium">{activeWork.title}</p>
+				{#if activeWork.kind === 'video' && activeWork.demoUrl}
+					<div class="aspect-video w-full overflow-hidden rounded-2xl bg-black">
+						<iframe
+							class="size-full"
+							src="https://www.youtube.com/embed/{getYouTubeId(activeWork.demoUrl)}"
+							title={activeWork.title}
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+							allowfullscreen
+						></iframe>
+					</div>
+				{:else}
+					<img
+						src={activeWork.url}
+						alt={activeWork.title}
+						class="max-h-[80vh] w-full rounded-2xl object-contain"
+					/>
+				{/if}
+				<div class="mt-3 flex flex-wrap items-center justify-between gap-2">
+					<p class="text-sm font-medium">{activeWork.title}</p>
+					{#if activeWork.demoUrl}
+						<a
+							href={activeWork.demoUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="btn btn-primary btn-sm"
+						>
+							{activeWork.kind === 'video' ? 'Watch on YouTube' : 'Visit live demo'}
+						</a>
+					{/if}
+				</div>
 			{/if}
 		</div>
 		<form method="dialog" class="modal-backdrop">
@@ -296,23 +305,18 @@
 {#snippet WorksGrid()}
 	<IntersectionObserver
 		delay={800}
-		class="thin-scroll min-h-0 flex-1 overflow-auto rounded-3xl bg-base-100 p-4"
+		class="no-scrollbar min-h-0 flex-1 overflow-auto rounded-3xl bg-base-100 p-4"
 	>
 		<div class="columns-1 gap-4 sm:columns-2">
 			{#each works as work (work.url)}
-				<button
-					type="button"
+				<div
 					use:revealOnView
-					class="work-item group mb-4 block w-full break-inside-avoid overflow-hidden rounded-3xl bg-base-200 focus-visible:outline-offset-4"
-					onclick={() => openWork(work)}
+					class="work-item mb-4 w-full break-inside-avoid {work.kind === 'dev'
+						? '[column-span:all]'
+						: ''}"
 				>
-					<img
-						src={work.url}
-						alt={work.title}
-						loading="lazy"
-						class="block w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-					/>
-				</button>
+					<WorkTile {work} onOpen={openWork} />
+				</div>
 			{/each}
 		</div>
 	</IntersectionObserver>
